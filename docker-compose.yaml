@@ -21,7 +21,7 @@ services:
     container_name: catalogue
     depends_on:
       - mongodb
-  user: 
+  user:
     image: user:v1
     container_name: user
     depends_on:
@@ -46,6 +46,18 @@ services:
       - user
       - cart
       - rabbitmq
+  # FRONTEND
+  frontend:
+    image: frontend:v1
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - catalogue
+      - user
+      - cart
+      - shipping
+      - payment
 networks:
   default:
     driver: bridge

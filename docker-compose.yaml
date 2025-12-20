@@ -1,9 +1,5 @@
 services:
-  catalogue:
-    image: catalogue:v1
-    container_name: catalogue
-    depends_on:
-      - mongodb
+  # DATABASES
   mongodb:
     image: mongodb:v1
     container_name: mongodb
@@ -19,7 +15,37 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
-  
+  # BACKEND
+  catalogue:
+    image: catalogue:v1
+    container_name: catalogue
+    depends_on:
+      - mongodb
+  user: 
+    image: user:v1
+    container_name: user
+    depends_on:
+      - mongodb
+      - redis
+  cart:
+    image: cart:v1
+    container_name: cart
+    depends_on:
+      - catalogue
+      - redis
+  shipping:
+    image: cart:v1
+    container_name: shipping
+    depends_on:
+      - cart
+      - mysql
+  payment:
+    image: payment:v1
+    container_name: payment
+    depends_on:
+      - user
+      - cart
+      - rabbitmq
 networks:
   default:
     driver: bridge

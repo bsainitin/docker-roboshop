@@ -14,7 +14,7 @@ LABEL com.project="roboshop" \
       created_by="sainitin"
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
-COPY --from=builder --chown roboshop:roboshop /opt/server/shipping.jar .
+COPY --from=builder --chown=roboshop:roboshop /opt/server/shipping.jar .
 USER roboshop
 ENTRYPOINT ["sh", "-c", "sleep 30 && java -jar shipping.jar"]
 

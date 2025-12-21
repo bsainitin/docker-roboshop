@@ -36,7 +36,7 @@ RUN apk add --no-cache pcre
 # Copy installed packages from builder
 COPY --from=builder /install /usr/local
 # Copy app files
-COPY --chown roboshop:roboshop payment.ini *.py requirements.txt .
+COPY --chown=roboshop:roboshop payment.ini *.py requirements.txt .
 USER roboshop
 CMD ["uwsgi", "--ini", "payment.ini"]
 

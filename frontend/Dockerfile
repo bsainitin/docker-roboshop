@@ -1,5 +1,6 @@
 FROM nginx:1.27-alpine
 
+# Commands to run nginx as non root
 RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 RUN mkdir -p /var/cache/nginx/client_temp && \
@@ -21,6 +22,10 @@ RUN touch /var/run/nginx.pid && \
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY static /usr/share/nginx/html/
+EXPOSE 80
+LABEL com.project="roboshop" \
+      component="frontend" \
+      created_by="sainitin"
 USER nginx
 CMD ["nginx", "-g", "daemon off;"]
 

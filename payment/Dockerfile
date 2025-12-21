@@ -21,8 +21,8 @@ WORKDIR /opt/server
 # Create non-root user
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 EXPOSE 8080
-LABEL com.project="roboshop"
-      component="payment"
+LABEL com.project="roboshop" \
+      component="payment" \
       created_by="sainitin"
 ENV CART_HOST="cart" \
     CART_PORT="8080" \
